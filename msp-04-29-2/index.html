@@ -3,6 +3,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>Signal Chat</title>
+    <style type="text/css">
+    	.container {
+    		width: 350px;
+    		margin: 0 auto;
+    		background-color: #FFCC00;
+    		border: 3px solid #006633;
+    		padding: 20px;
+    		margin: 20px;
+    	}
+    </style>
 </head>
 <body>
 	<div class="container">
@@ -11,5 +21,20 @@
 		<input type="hidden" id="displayname" />
 		<ul id="discussion"></ul>
 	</div>
+	<script src="Scripts/jquery-1.6.4.min.js"></script>
+	<script src="Scripts/jquery.signalR-2.0.3.min.js"></script>
+	<script src="signalr/hubs"></script>
+	<script type="text/javascript">
+	$(function(){
+		var chat = $.connection.chatHub;
+		chat.client.broadcastMessage = function (name, message){
+			var encodedName = $('<div />').text(name).html();
+			var encodedMsg = $('<div />').text(message).html();
+			$('#discussion').append('<li><strong>' + 
+				encodedName + '</strong>:&nbsp;&nbsp;' + encodedMsg + '</li>');
+		};
+		$('#displayname').val(prompt('名前を入れてね',''));
+	});
+	</script>
 </body>
 </html>
