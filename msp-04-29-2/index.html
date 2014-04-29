@@ -16,6 +16,10 @@
     	li {
     		list-style-type: none;
     	}
+
+    	span.user-name {
+    		color:#000000;
+    	}
     </style>
 </head>
 <body>
@@ -34,8 +38,8 @@
 		chat.client.broadcastMessage = function (name, message){
 			var encodedName = $('<div />').text(name).html();
 			var encodedMsg = $('<div />').text(message).html();
-			$('#discussion').append('<li><strong>' + 
-				encodedName + '</strong>:&nbsp;&nbsp;' + encodedMsg + '</li>');
+			$('#discussion').append('<li><span class="user-name">' + 
+				encodedName + '</span>:&nbsp;&nbsp;' + encodedMsg + '</li>');
 		};
 
 		$('#displayname').val(prompt('名前を入れてね',''));
